@@ -23,4 +23,4 @@ CREATE TABLE Players
     last_name VARCHAR(50) NOT NULL,
     jersey_number INT NOT NULL,
     UNIQUE (team_id, jersey_number)
-);
+);  
