@@ -46,4 +46,4 @@ CREATE TABLE Player_Match_Stats
     player_id INT REFERENCES Players(player_id) ON DELETE CASCADE,
     goals_scored INT DEFAULT 0 CHECK (goals_scored>=0),
     UNIQUE (match_id, player_id) -- constraint
-);
+);  
