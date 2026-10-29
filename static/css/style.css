@@ -1,0 +1,320 @@
+
+/* ========================================
+   ISMS - Modern Dark Sports Dashboard
+   ======================================== */
+
+:root {
+    color-scheme: dark;
+    --bg: #0b1120;
+    --surface: #151f32;
+    --surface-hover: #1b2940;
+    --border: #293750;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --success: #34d399;
+    --danger: #fb7185;
+    --warning: #fbbf24;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+header {
+    padding: 28px 6%;
+    background: linear-gradient(135deg, #111c31, #172b49);
+    border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+header p {
+    margin: 5px 0 0;
+    color: var(--muted);
+}
+
+/* Navigation */
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px 6%;
+    background: #0e1728;
+    border-bottom: 1px solid var(--border);
+}
+
+nav a {
+    display: inline-block;
+    padding: 9px 13px;
+    color: var(--muted);
+    text-decoration: none;
+    border-radius: 8px;
+    border-bottom: 3px solid transparent;
+    transition: 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--text);
+    background: var(--surface-hover);
+}
+
+nav a.active {
+    color: #93c5fd !important;
+    background: #1e3a5f;
+    border-bottom: 3px solid var(--primary) !important;
+    padding-bottom: 9px;
+}
+
+/* Main content */
+
+main {
+    width: min(1200px, 92%);
+    margin: 32px auto;
+}
+
+section {
+    margin-bottom: 26px;
+    padding: 26px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    overflow-x: auto;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 23px;
+    letter-spacing: -0.3px;
+}
+
+h3 {
+    color: var(--text);
+}
+
+p {
+    color: #cbd5e1;
+}
+
+/* Tables */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    background: transparent;
+}
+
+th,
+td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    color: #bfdbfe;
+    background: #1b2940;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+td {
+    color: #dbe4f0;
+}
+
+tbody tr {
+    transition: background 0.15s ease;
+}
+
+tbody tr:hover {
+    background: var(--surface-hover);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Forms */
+
+.form-row {
+    margin-bottom: 20px;
+}
+
+.form-row label,
+label {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: #dbe4f0;
+    font-weight: 500;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    max-width: 520px;
+    padding: 11px 13px;
+    color: var(--text);
+    background: #0e1728;
+    border: 1px solid #34435d;
+    border-radius: 8px;
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #64748b;
+}
+
+select option {
+    color: var(--text);
+    background: var(--surface);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    width: auto;
+    accent-color: var(--primary);
+}
+
+input[type="number"].score,
+.score {
+    width: 100px;
+}
+
+/* Buttons */
+
+button,
+input[type="submit"] {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    padding: 11px 19px;
+    color: #ffffff;
+    background: var(--primary);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: var(--primary-hover);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Flash messages */
+
+.message {
+    padding: 13px 16px;
+    margin-bottom: 18px;
+    color: #bbf7d0 !important;
+    background: #123126 !important;
+    border: 1px solid #246344;
+    border-radius: 9px;
+}
+
+/* Links */
+
+main a {
+    color: #93c5fd;
+}
+
+main a:hover {
+    color: #bfdbfe;
+}
+
+/* Score and status elements */
+
+.score {
+    font-weight: 600;
+    text-align: center;
+}
+
+.badge,
+.status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Responsive layout */
+
+@media (max-width: 700px) {
+    header {
+        padding: 22px 5%;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    nav {
+        padding: 12px 4%;
+        gap: 5px;
+    }
+
+    nav a {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    main {
+        width: 94%;
+        margin: 20px auto;
+    }
+
+    section {
+        padding: 17px;
+    }
+
+    table {
+        min-width: 520px;
+    }
+
+    th,
+    td {
+        padding: 11px;
+    }
+}
