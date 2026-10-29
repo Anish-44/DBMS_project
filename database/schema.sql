@@ -45,6 +45,7 @@ CREATE TABLE Player_Match_Stats
     stat_id SERIAL PRIMARY KEY,
     match_id INT NOT NULL REFERENCES Matches(match_id) ON DELETE CASCADE,
     player_id INT NOT NULL REFERENCES Players(player_id) ON DELETE CASCADE,
+    team_id INT NOT NULL REFERENCES Teams(team_id) ON DELETE CASCADE,
     goals_scored INT DEFAULT 0 CHECK (goals_scored >= 0),
     UNIQUE (match_id, player_id)
 );  
