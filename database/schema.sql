@@ -32,6 +32,7 @@ CREATE TABLE Matches
     home_team_id INT REFERENCES Teams(team_id) ON DELETE CASCADE,
     away_team_id INT REFERENCES Teams(team_id) ON DELETE CASCADE,
     venue_id INT REFERENCES Venues(venue_id) ON DELETE SET NULL,
+    match_status VARCHAR(20) DEFAULT 'Scheduled' CHECK (match_status IN ('Scheduled', 'In Progress', 'Completed', 'Cancelled')),
     match_date TIMESTAMP NOT NULL,
     home_score INT DEFAULT 0,
     away_score INT DEFAULT 0,

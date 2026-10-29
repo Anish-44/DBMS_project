@@ -76,5 +76,5 @@ INSERT INTO Players(team_id, first_name, last_name, jersey_number)
 VALUES (5, 'John', 'Doe', 99);
 
 --Add a new match
-INSERT INTO Matches(home_team_id, away_team_id, venue_id, match_data, match_status)
+INSERT INTO Matches(home_team_id, away_team_id, venue_id, match_date, match_status)
 VALUES (1,3,2, '2026-11-10 18:00:00', 'Scheduled');
