@@ -1,12 +1,12 @@
 --Top Scorer Leaderboard Query
 SELECT p.player_id, p.first_name || ' ' || p.last_name AS player_name,
 t.team_name, SUM(pms.goals_scored) AS total_goals
-FROM Players p 
-JOIN Teams t ON p.team_id = t.team_id
-JOIN Player_Match_Stats pms ON p.player_id = pms.player_id
+FROM Player_Match_Stats pms 
+JOIN Players p ON pms.player_id = p.player_id
+JOIN Teams t ON pms.team_id = t.team_id -- Changed from p.team_id
 JOIN Matches m ON pms.match_id = m.match_id
-WHERE m.match_status = 'Completed' 
-GROUP BY p.player_id, p.first_name, p.last_name, t.team_name   
+WHERE m.match_status = 'Completed'
+GROUP BY p.player_id, p.first_name, p.last_name, t.team_name
 HAVING SUM(pms.goals_scored) > 0
 ORDER BY total_goals DESC;
 
