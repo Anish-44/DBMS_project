@@ -6,16 +6,19 @@ JOIN Teams t ON p.team_id = t.team_id
 JOIN Player_Match_Stats pms ON p.player_id = pms.player_id
 JOIN Matches m ON pms.match_id = m.match_id
 WHERE m.match_status = 'Completed' 
-GROUP BY p.player_id, p.first_name, p.last_name, t.team_name
+GROUP BY p.player_id, p.first_name, p.last_name, t.team_name   
 HAVING SUM(pms.goals_scored) > 0
 ORDER BY total_goals DESC;
 
 --Match Schedule & Scores Overview Query
 SELECT m.match_id, ht.team_name AS home_team, awt.team_name AS away_team,
-m.home_score|| '-' || m.away_score AS score, v.venue_name, m.match_date
-FROM Matches m JOIN Teams ht ON m.home_team_id=ht.team_id
+m.home_score|| '-' || m.away_score AS score, 
+COALESCE(v.venue_name, 'TBD (Venue Deleted)') AS venue_name,  
+m.match_date
+FROM Matches m 
+JOIN Teams ht ON m.home_team_id=ht.team_id
 JOIN Teams awt ON m.away_team_id=awt.team_id
-JOIN Venues v ON m.venue_id=v.venue_id
+LEFT JOIN Venues v ON m.venue_id=v.venue_id 
 ORDER BY m.match_date DESC;
 
 --Dynamic League Standings Query
@@ -52,11 +55,12 @@ SELECT venue_id, venue_name, address FROM Venues ORDER BY venue_id;
 --Display all matches
 SELECT
 m.match_id, ht.team_name AS home_team, awt.team_name AS away_team,
-v.venue_name, m.match_date, m.home_score || '-' || m.away_score AS score,
+COALESCE(v.venue_name, 'TBD (Venue Deleted)') AS venue_name, 
+m.match_date, m.home_score || '-' || m.away_score AS score,
 m.match_status FROM matches m
 JOIN Teams ht ON m.home_team_id=ht.team_id
 JOIN Teams awt ON m.away_team_id=awt.team_id
-JOIN Venues v ON m.venue_id=v.venue_id
+LEFT JOIN Venues v ON m.venue_id=v.venue_id 
 ORDER BY m.match_date DESC;
 
 --Display Matches
@@ -74,9 +78,9 @@ WHERE pms.match_id=1
 ORDER BY pms.goals_scored DESC;
 
 --For the below queries, replace hardcoded names with placeholders in UI
-
+ 
 --Add a new team
-INSERT INTO Teams(team_name, coach_name) VALUES ('Warriors', 'Coach Dan');
+INSERT INTO Teams(team_name, coach_name) VALUES ('Warriors', 'Coach Dan');  
 
 --Add a player to a team
 --Add a dropdown of teams to supply the team_id
