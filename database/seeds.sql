@@ -4,7 +4,7 @@ INSERT INTO Venues (venue_name, address) VALUES
 ('Student Turf Field', 'East Campus Quad'),
 ('Indoor Sports Center', 'South Campus Gym');
 
--- Insert Teams
+-- Insert Teams  
 INSERT INTO Teams (team_name, coach_name) VALUES
 ('Thunderbolts', 'Coach Sarah'),
 ('Vipers', 'Coach Mike'),

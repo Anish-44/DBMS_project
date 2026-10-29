@@ -1,10 +1,13 @@
 --Top Scorer Leaderboard Query
 SELECT p.player_id, p.first_name || ' ' || p.last_name AS player_name,
 t.team_name, SUM(pms.goals_scored) AS total_goals
-FROM Players p JOIN Teams t on p.team_id=t.team_id
-JOIN Player_Match_Stats pms ON p.player_id=pms.player_id
+FROM Players p 
+JOIN Teams t ON p.team_id = t.team_id
+JOIN Player_Match_Stats pms ON p.player_id = pms.player_id
+JOIN Matches m ON pms.match_id = m.match_id
+WHERE m.match_status = 'Completed' 
 GROUP BY p.player_id, p.first_name, p.last_name, t.team_name
-HAVING SUM(pms.goals_scored)>0
+HAVING SUM(pms.goals_scored) > 0
 ORDER BY total_goals DESC;
 
 --Match Schedule & Scores Overview Query
@@ -20,18 +23,23 @@ WITH TeamMatches AS
 (
     SELECT home_team_id AS team_id, home_score AS score_for, away_score AS score_against
     FROM Matches
+    WHERE match_status = 'Completed' 
     UNION ALL
     SELECT away_team_id AS team_id, away_score AS score_for, home_score AS score_against
     FROM Matches
+    WHERE match_status = 'Completed' 
 )
 SELECT t.team_name, COUNT(tm.team_id) AS matches_played,
-SUM(CASE WHEN tm.score_for>tm.score_against THEN 1 ELSE 0 END) AS wins,
-SUM(CASE WHEN tm.score_for=tm.score_against THEN 1 ELSE 0 END) AS draws,
-SUM(CASE WHEN tm.score_for<tm.score_against THEN 1 ELSE 0 END) AS losses,
-SUM(CASE WHEN tm.score_for>tm.score_against THEN 3 WHEN tm.score_for=tm.score_against 
-THEN 1 ELSE 0 END) AS total_points
+COALESCE(SUM(CASE WHEN tm.score_for > tm.score_against THEN 1 ELSE 0 END), 0) AS wins,
+COALESCE(SUM(CASE WHEN tm.score_for = tm.score_against THEN 1 ELSE 0 END), 0) AS draws,
+COALESCE(SUM(CASE WHEN tm.score_for < tm.score_against THEN 1 ELSE 0 END), 0) AS losses,
+COALESCE(SUM(CASE 
+    WHEN tm.score_for > tm.score_against THEN 3 
+    WHEN tm.score_for = tm.score_against THEN 1 
+    ELSE 0 
+END), 0) AS total_points
 FROM Teams t
-LEFT JOIN TeamMatches tm ON t.team_id=tm.team_id
+LEFT JOIN TeamMatches tm ON t.team_id = tm.team_id
 GROUP BY t.team_id, t.team_name
 ORDER BY total_points DESC, wins DESC;   
 
