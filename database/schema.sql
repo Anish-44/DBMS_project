@@ -3,7 +3,7 @@ CREATE TABLE Venues
 (
     venue_id SERIAL PRIMARY KEY,
     venue_name VARCHAR(100) NOT NULL,
-    venue_address TEXT NOT NULL
+    address TEXT NOT NULL
 );
 
 -- Teams Table
