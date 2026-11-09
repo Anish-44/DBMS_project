@@ -1782,7 +1782,7 @@ def save_player_goals():
 
 
 
-    return redirect(url_for("score_page"))
+    return redirect(url_for("scores_page"))
 
 
 
