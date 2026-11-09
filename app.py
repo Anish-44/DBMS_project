@@ -1770,7 +1770,7 @@ def save_player_goals():
 
 
 
-    except ValueError:
+    except ValueError:  
 
         flash("Enter valid match, player, and non-negative goal values.")
 
